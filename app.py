@@ -11,16 +11,11 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = request.get_json()
-
-    text = data.get("text", "")
-
-    if text.strip() == "":
-        return jsonify({
-            "error": "No text provided"
-        }), 400
-
     try:
+        data = request.get_json()
+
+        text = data.get("text", "")
+
         prediction = predict_news_type(text)
 
         return jsonify({
@@ -33,5 +28,5 @@ def predict():
         }), 500
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# IMPORTANT FOR VERCEL
+app = app
